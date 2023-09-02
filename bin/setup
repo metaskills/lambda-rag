@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+echo '== Installing dependencies =='
+npm install
+
+if [ "$(uname -m)" = "aarch64" ] && [ "$(uname -s)" = "Linux" ]; then
+  echo '== Installing sqlite3 for Linux arm64 =='
+  cp -r ./db/node/sqlite-vss-linux-arm64 ./node_modules
+fi

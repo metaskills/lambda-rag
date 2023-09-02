@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: LambdaGPT - RAG Demo
+
+Globals:
+  Function:
+    Architectures:
+      - arm64
+    AutoPublishAlias: live
+    DeploymentPreference:
+      Type: AllAtOnce
+    Environment:
+      Variables:
+        NODE_ENV: production
+        AWS_LWA_PORT: 8080
+        AWS_LWA_READINESS_CHECK_PATH: /is_it_up
+        AWS_LWA_INVOKE_MODE: response_stream
+        LD_PRELOAD: /opt/lib/libcrypteia.so
+        SECRET: x-crypteia-ssm:/lambda-gpt/OPENAI_API_KEY
+    Timeout: 120
+
+Resources:
+  Lambda:
+    Type: AWS::Serverless::Function
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: .
+    Properties:
+      FunctionUrlConfig:
+        AuthType: NONE
+        InvokeMode: RESPONSE_STREAM
+      MemorySize: 1792
+      PackageType: Image
+      Policies:
+        - SSMParameterReadPolicy:
+            ParameterName: lambda-gpt/OPENAI_API_KEY
+
+Outputs:
+  LambdaGPTLambdaArn:
+    Description: Lambda Function Arn
+    Value: !GetAtt Lambda.Arn
+  LambdaGPTInvokeUrl:
+    Description: Lambda Function URL
+    Value: !GetAtt LambdaUrl.FunctionUrl

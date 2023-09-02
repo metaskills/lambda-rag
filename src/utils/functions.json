@@ -1,0 +1,37 @@
+[
+  {
+    "name": "search_products",
+    "description": "Vector search all products. Uses a product's name, heading, description, details, primary category name, variation info, available sizes, and sizing info",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The vector query to search for"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "The number of products to return. Defaults to 5",
+          "default": 5
+        },
+        "category": {
+          "type": "string",
+          "description": "The root category name to focus search results on",
+          "enum": [
+            "Accessories",
+            "Activewear",
+            "Jackets/Coats",
+            "Jewelry",
+            "Pants",
+            "Shirts",
+            "Shoes",
+            "Suits",
+            "Sweaters",
+            "Underwear and Nightwear"
+          ]
+        }
+      },
+      "required": ["query"]
+    }
+  }
+]

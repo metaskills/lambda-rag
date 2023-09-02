@@ -1,0 +1,43 @@
+#!/bin/sh
+set -e
+
+# https://github.com/aws/aws-sam-cli/issues/2447
+AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+IMAGE_REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/lambda-gpt"
+
+echo '== NPM Install (Dev) =='
+npm install --no-audit --no-save
+
+echo '== Vite Build =='
+NODE_ENV=production npm run v:build
+rm -rf public src-frontend
+mv dist public
+
+echo '== NPM Install (Prod) =='
+rm -rf node_modules
+npm install --no-audit --no-save --omit=dev
+
+echo "== Cleanup Unused Files & Directories =="
+rm -rf \
+  .git* \
+  log \
+  test \
+  tmp
+
+echo "== ECR Public Login =="
+aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+
+echo "== SAM build =="
+sam build 
+
+echo "== SAM package =="
+sam package \
+  --region "$AWS_REGION" \
+  --image-repository "$IMAGE_REPOSITORY"
+
+echo "== SAM deploy =="
+sam deploy \
+  --region "$AWS_REGION" \
+  --stack-name "lambda-gpt" \
+  --image-repository "$IMAGE_REPOSITORY" \
+  --capabilities "CAPABILITY_IAM"

@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+# Start backend express server.
+nodemon \
+  --watch src \
+  --ext 'js,yaml,json' \
+  --exec node src/app.js

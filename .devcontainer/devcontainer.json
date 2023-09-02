@@ -1,0 +1,43 @@
+{
+  "name": "lambda-gpt",
+  "dockerFile": "Dockerfile",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "github.vscode-github-actions",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next",
+        "alexcvzz.vscode-sqlite",
+        "bradlc.vscode-tailwindcss",
+        "Vue.volar",
+        "42Crunch.vscode-openapi"
+      ],
+      "settings": {
+        "[html]": {
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": "vscode.html-language-features"
+        },
+        "[vue]": {
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": "Vue.volar"
+        }
+      }
+    }
+  },
+  "containerEnv": {
+    "NODE_ENV": "development"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/customink/codespaces-features/sam-cli:1": {}
+  },
+  "remoteUser": "vscode",
+  "postAttachCommand": "./.devcontainer/postAttach.sh",
+  "mounts": [
+    "source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached"
+  ]
+}

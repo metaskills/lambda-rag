@@ -1,0 +1,10 @@
+/dist
+/node_modules
+/.aws-sam
+.env.*
+!.env.development
+!.env.test
+__diff_output__
+log/*.log
+/db/embeddings-cache
+/db/lambdagpt.db-journal
