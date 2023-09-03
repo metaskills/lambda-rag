@@ -4,7 +4,10 @@
 <template>
   <div id="prompt-message" class="pb-3 pt-2 text-center text-xs md:pb-6 md:pt-3">
     <span>
-      LambdaRAG is a Demo. Please read the full <a href="">RAGs to Riches</a> blog series.
+      LambdaRAG is a Demo. Please read the full <a
+        href="https://dev.to/aws-heroes/rags-to-riches-part-1-generative-ai-retrieval-2i87-temp-slug-3736215"
+        target="_blank">RAGs to
+        Riches</a> blog series.
     </span>
   </div>
 </template>

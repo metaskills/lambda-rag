@@ -1,5 +1,10 @@
 
-# LambdaRAG - Demo
+# Retrieval Augmented Generation Chat AI Demo
+
+![LambdaRAG](./public/rags-to-riches.png)
+
+Please read the full "RAGs to Riches" blog series:<br>
+https://dev.to/aws-heroes/rags-to-riches-part-1-generative-ai-retrieval-2i87-temp-slug-3736215
 
 
 ## Development
@@ -10,8 +15,19 @@
 OPENAI_API_KEY=sk...
 ```
 
+## Proprietary Data
 
-## Deployment
+
+```
+> npm run db:create
+> lambda-rag@1.0.0 db:create
+> rm -rf db/lambdarag.db && node db/create.js
+Using sqlite-vss version: v0.1.1
+Inserting product data...
+ ██████████████████████████████████░░░░░░ 84% | ETA: 2s | 4242/5001
+```
+
+## Deploy to Lambda
 
 * Setup `/lambda-rag/OPENAI_API_KEY` in SSM.
 
