@@ -1,5 +1,5 @@
 {
-  "name": "lambda-gpt",
+  "name": "lambda-rag",
   "dockerFile": "Dockerfile",
   "customizations": {
     "vscode": {

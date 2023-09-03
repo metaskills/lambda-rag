@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
-Description: LambdaGPT - RAG Demo
+Description: LambdaRAG - RAG Demo
 
 Globals:
   Function:
@@ -16,7 +16,7 @@ Globals:
         AWS_LWA_READINESS_CHECK_PATH: /is_it_up
         AWS_LWA_INVOKE_MODE: response_stream
         LD_PRELOAD: /opt/lib/libcrypteia.so
-        SECRET: x-crypteia-ssm:/lambda-gpt/OPENAI_API_KEY
+        SECRET: x-crypteia-ssm:/lambda-rag/OPENAI_API_KEY
     Timeout: 120
 
 Resources:
@@ -33,12 +33,12 @@ Resources:
       PackageType: Image
       Policies:
         - SSMParameterReadPolicy:
-            ParameterName: lambda-gpt/OPENAI_API_KEY
+            ParameterName: lambda-rag/OPENAI_API_KEY
 
 Outputs:
-  LambdaGPTLambdaArn:
+  LambdaRAGLambdaArn:
     Description: Lambda Function Arn
     Value: !GetAtt Lambda.Arn
-  LambdaGPTInvokeUrl:
+  LambdaRAGInvokeUrl:
     Description: Lambda Function URL
     Value: !GetAtt LambdaUrl.FunctionUrl

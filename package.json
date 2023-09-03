@@ -1,5 +1,5 @@
 {
-  "name": "lambda-gpt",
+  "name": "lambda-rag",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -8,11 +8,11 @@
     "v:build": "npx vite build",
     "v:serve": "npx vite preview",
     "test": "./bin/test",
-    "db:create": "rm -rf db/lambdagpt.db && node db/create.js",
+    "db:create": "rm -rf db/lambdarag.db && node db/create.js",
     "db:embeddings": "node db/embedding.js",
     "db:clean": "node db/clean.js",
     "db:test": "node db/test.js",
-    "db:schema": "sqlite3 db/lambdagpt.db .schema > db/schema.sql"
+    "db:schema": "sqlite3 db/lambdarag.db .schema > db/schema.sql"
   },
   "dependencies": {
     "better-sqlite3": "^8.5.0",

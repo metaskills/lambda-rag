@@ -7,4 +7,4 @@
 __diff_output__
 log/*.log
 /db/embeddings-cache
-/db/lambdagpt.db-journal
+/db/lambdarag.db-journal

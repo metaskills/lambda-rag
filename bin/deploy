@@ -3,7 +3,7 @@ set -e
 
 # https://github.com/aws/aws-sam-cli/issues/2447
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-IMAGE_REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/lambda-gpt"
+IMAGE_REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/lambda-rag"
 
 echo '== NPM Install (Dev) =='
 npm install --no-audit --no-save
@@ -38,6 +38,6 @@ sam package \
 echo "== SAM deploy =="
 sam deploy \
   --region "$AWS_REGION" \
-  --stack-name "lambda-gpt" \
+  --stack-name "lambda-rag" \
   --image-repository "$IMAGE_REPOSITORY" \
   --capabilities "CAPABILITY_IAM"
