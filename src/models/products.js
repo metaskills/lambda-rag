@@ -8,7 +8,7 @@ export const searchProducts = async (params) => {
     SELECT * FROM products
     WHERE ROWID IN (
       SELECT ROWID FROM vss_products
-      WHERE vss_search(embedding, vss_search_params(:embedding, 500))
+      WHERE vss_search(embedding, vss_search_params(:embedding, :limit))
     )
 `;
   if (params.category) {
